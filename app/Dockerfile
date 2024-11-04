@@ -9,6 +9,8 @@ RUN apk add --no-cache \
     musl-dev
 
 # Establece el directorio de trabajo
+RUN mkdir -p /workspace
+
 WORKDIR /workspace
 
 # Copia el archivo de requerimientos
