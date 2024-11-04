@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "Flet",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "frontend",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"audioCues.enabled": "off",
+				"audioCues.lineHasError": false,
+				"audioCues.lineHasWarning": false,
+				"audioCues.noProblem": false,
+				"workbench.colorTheme": "Default Light+"				
+			},
+			"extensions": [
+				"franneck94.vscode-python-dev-extension-pack",
+                "ms-python.python",
+                "ms-mysql.mysql"
+			]
+		}
+	}
+
+}

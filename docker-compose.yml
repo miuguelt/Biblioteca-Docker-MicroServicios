@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: ./app
+    volumes:
+      - ./app:/workspace
+      #- ./pip-cache:/root/.cache/pip
+    ports:
+      - "81:80"
+    networks:
+      - flask_flet_net
+    container_name: flask
+    
+  frontend:
+    build:
+      context: ./FrontEnd
+    ports:
+      - "8008:8008"
+    networks:
+      - flask_flet_net
+    volumes:
+      - ./FrontEnd:/app
+      - ./app_data:/var/cache/apk/*.apk 
+      #- ./pip_cache:/root/.cache/pip
+    container_name: flet
+
+networks:
+  flask_flet_net:
+    driver: bridge

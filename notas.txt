@@ -1,0 +1,67 @@
+Ubicacion de los archivos:
+python /usr/local/bin/python
+flask  /usr/local/bin/flask
+flet /usr/local/bin/flet
+poetry /usr/local/bin/poetry
+
+FROM python:3.11-alpine
+
+# Instalar dependencias necesarias y crear el directorio sudoers.d
+RUN apk add --no-cache sudo gcc musl-dev linux-headers && \
+    mkdir -p /etc/sudoers.d
+
+# Crear usuario no root
+RUN adduser -D -h /home/myuser myuser && \
+    echo "myuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/myuser && \
+    chmod 0440 /etc/sudoers.d/myuser
+
+# Cambiar al usuario no root
+USER myuser
+
+WORKDIR /app
+# Crear y activar entorno virtual
+RUN python -m venv /home/myuser/venv
+ENV PATH="/home/myuser/venv/bin:$PATH"
+RUN echo "source /home/myuser/venv/bin/activate" >> /home/myuser/.bashrc
+
+# Establece la carpeta de trabajo dentro del contenedor
+# Copiar requirements.txt e instalar dependencias
+COPY --chown=myuser:myuser requirements.txt /app
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Instalar Flet
+RUN pip install flet
+
+# Copia el resto de los archivos de tu aplicación al contenedor
+COPY --chown=myuser:myuser . .
+
+# Expone el puerto por defecto en el que Flet corre
+EXPOSE 8550
+
+# Comando para ejecutar la aplicación Flet
+CMD ["flet", "run", "main.py"]
+
+
+
+
+
+FROM python:3.11-alpine
+
+# Crear usuario no root
+RUN adduser -D -h /home/myuser myuser
+USER myuser
+
+WORKDIR /home/myuser/app
+# Crear y activar entorno virtual
+RUN python -m venv /home/myuser/venv
+ENV PATH=/home/myuser/venv/bin:$PATH
+RUN echo "source /home/myuser/venv/bin/activate" >> /home/myuser/.bashrc
+COPY --chown=myuser:myuser requirements.txt /home/myuser/app
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN chmod -R 755 /home/myuser
+
+EXPOSE 8000
+
+#CMD ["python" , "main.py"]
+CMD ["sleep" , "Infinity"]
