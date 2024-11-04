@@ -22,5 +22,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 80
 
 # Comando para mantener el contenedor en ejecución (ajusta según tus necesidades)
-CMD [ "sleep", "infinity" ]
-#CMD [ "python", "run.py" ]
+#CMD [ "sleep", "infinity" ]
+CMD [ "python", "run.py" ]
