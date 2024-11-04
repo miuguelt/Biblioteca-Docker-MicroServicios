@@ -20,9 +20,13 @@ services:
       - flask_flet_net
     volumes:
       - ./FrontEnd:/app
-      - ./app_data:/var/cache/apk/*.apk 
+      #- ./app_data:/var/cache/apk/*.apk 
       #- ./pip_cache:/root/.cache/pip
     container_name: flet
+
+volumes:
+  app:
+  FrontEnd:
 
 networks:
   flask_flet_net:
