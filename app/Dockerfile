@@ -12,12 +12,11 @@ RUN apk add --no-cache \
 WORKDIR /workspace
 
 # Copia el archivo de requerimientos
-COPY requirements.txt /workspace
+COPY .  /workspace
 
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY .  /workspace
 EXPOSE 80
 
 # Comando para mantener el contenedor en ejecución (ajusta según tus necesidades)
