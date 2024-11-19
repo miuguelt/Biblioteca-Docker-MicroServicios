@@ -4,6 +4,8 @@ services:
       context: ./app
     networks:
       - flask_flet_net
+    port:
+      83:80
     container_name: flask
     restart: always
     
