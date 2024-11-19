@@ -17,5 +17,7 @@ services:
     container_name: flet
 
 networks:
+  coolify:
+    driver: external
   flask_flet_net:
-    driver: bridge
+
