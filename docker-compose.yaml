@@ -2,17 +2,14 @@ services:
   app:
     build:
       context: ./app
-    ports:
-      - "81:80"
     networks:
       - flask_flet_net
     container_name: flask
+    restart: always
     
   frontend:
     build:
       context: ./FrontEnd
-    ports:
-      - "8008:8008"
     networks:
       - flask_flet_net
     container_name: flet
