@@ -17,5 +17,7 @@ services:
     container_name: flet
 
 networks:
+  coolify:
+    external: true
   flask_flet_net:
 
