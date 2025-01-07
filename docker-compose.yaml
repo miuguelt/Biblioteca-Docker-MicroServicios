@@ -12,6 +12,8 @@ services:
   frontend:
     build:
       context: ./FrontEnd
+    ports:
+      94:94
     networks:
       - flask_flet_net
     container_name: flet
